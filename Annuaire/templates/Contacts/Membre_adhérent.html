@@ -1,0 +1,695 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Annuaire</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" type="text/css"  href="{% static 'css/style.css' %}">
+        <!-- Lien CSS Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            *{ 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} 
+
+html,body{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(230, 231, 231);
+    height: 100%;
+    min-height: 210vh;
+    display: flex;
+    flex-direction: column;
+}
+nav{
+    width: 100%;
+    background-color: #fff;
+    height: 70px;
+    top: 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ul{
+    list-style: none;
+}
+
+ul li{
+    display: inline-block;
+    position: relative;
+    width: 230px;
+    
+}
+
+ul li a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    margin-right: 2em;
+}
+
+ul li ul.liste li{
+    display: flex;
+}
+
+ul li ul.liste li:hover{
+    display: flex;
+    background-color: rgb(242, 179, 20);
+    color: #fff;
+}
+
+ul li ul.liste li a:hover{
+    background-color: rgb(242, 179, 20);
+    color: #fff;
+}
+
+ul li ul.liste li img{
+    width: 30px;
+    height: 30px;
+}
+
+ul li ul.liste li img:hover{
+    background-color: rgb(242, 179, 20);
+}
+
+ul li ul.liste{
+    width: 230px;
+    background:#fff ;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    border-radius: 0.5em;
+}
+
+ul li a:hover{
+    background: #fff;
+}
+ul li:hover ul.liste{
+    display: block;
+}
+
+img{
+    width: 80px;
+    height: 70px;
+   
+}
+
+.logo{
+    position: absolute;
+    left: 40px;
+}
+.menu-deroulant{
+    position: absolute;
+    left: 200px;
+}
+
+.connexion{
+     position: absolute;
+     right: 90px;
+     background-color: rgb(242, 179, 20);
+     border-radius: 10px;
+     width: 100px;
+     height: 40px;
+     text-align: center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+.connexion a{
+     text-decoration: none;
+     color: #fff;
+     
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 100px;
+    overflow: hidden;
+    padding: 5px;
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    left: 450px;
+    height: 50px;
+    border: 1px solid grey;
+   
+}
+
+.search-bar input {
+border: none;
+padding: 8px 10px;
+outline: none;
+flex-grow: 1;
+}
+
+.search-bar button {
+border: none;
+background-color: rgb(242, 179, 20);
+color: white;
+padding: 8px 12px;
+cursor: pointer;
+font-size: 1rem;
+position: absolute;
+right: 5px;
+}
+
+/* Footer styles */
+.foot {
+background-color: #2c3e50; /* Couleur de fond */
+color: white; /* Couleur du texte */
+height: 100px;
+}
+
+.footer-bot {
+text-align: center;
+font-size: 0.8rem;
+color: #bdc3c7;
+}
+.footer-bottom img{
+     width: 50px;
+     height: 40px;
+}
+
+table {
+        max-width: 100%;
+        border-collapse: collapse;
+        min-height: auto;
+        margin-top: 30px;
+        overflow-x: auto;
+        table-layout: fixed;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-bottom: 40px;
+        }
+
+table, th, td {
+        border: 1px solid black;
+        }
+ th, td {
+        padding: 8px;
+        text-align: left;
+        overflow: hidden;
+        font-size: 10px;
+        }
+th {
+        background-color: rgb(242, 179, 20);
+        color: #fff;
+        }
+
+ th, td {
+        word-wrap: break-word;
+    }
+
+    thead, tbody{
+         text-align: center;
+    }
+
+    main{
+        flex: 1; 
+    }
+    main h2{
+        text-align: center;
+        color: rgb(242, 179, 20);
+        font-size: 30px;
+        margin-top: 35px;
+    }
+
+   .hidden{
+        display: none;
+    }
+
+    .form{
+        display: block;
+        
+    }
+    .champ{
+        display: flex;
+    }
+ .Diplôme, .région_origine,.programme,.année, .sexe,.age,.profession, .secteur,.secteur_activité,.pays_de_résidence,.région_de_résidence,.département_de_résidence{
+    margin-bottom: 25px;
+ }
+
+ #diplôme, #région_origine,#programme,#année, #sexe,#age,#profession, #secteur,#secteur_activité,#pays_de_résidence,#région_de_résidence,#département_de_résidence{
+      height: 30px;
+      width: 400px;
+      display: block;
+ }
+    
+ .champ-filtre{
+    margin-top: 100px;
+    background-color: #fff;
+    margin: 50px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+ }
+
+ .Block2{
+     margin-left: 150px;
+ }
+
+  label{
+    margin-right: 15px;
+  } 
+  .button{
+    background-color: #fff;
+    margin-left: 350px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 90px;
+  } 
+
+  .buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 85px;
+  }
+ 
+  .nbre_lignes{
+    position: absolute;
+    left: 500px;
+    display: block;
+  }
+
+  .menu{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 200px;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.menu .Annuaire{
+    margin-right: 20px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover{
+    color: rgb(242, 179, 20);
+} 
+
+@media (max-width: 768px) {
+th, td {
+            font-size: 12px;
+            padding: 5px;
+        }
+    } 
+        </style>
+    </head>
+    <body>
+        <nav>
+                <div class="logo">
+                    <img src="{% static 'images\Logo-Okwelians-removebg-preview.png' %}" alt="">
+                </div>
+                <div class="menu">
+                   
+                    <a href="{% url 'List_Général' %}" class="Annuaire">Annuaire des membres</a>
+                    <a href="{% url 'Liste_lauréats' %}">Extraire les contacts</a>
+                    
+           
+               </div>
+                
+                <div class="search-bar">
+                    <form method="get" action="{% url 'Liste_membre_adhérent' %}">
+                        <input type="text" placeholder="Entrez le nom" aria-label="Rechercher" name="recherche">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                    
+                </div> 
+                <div class="connexion"><a href="">Se connecter</a></div> 
+        </nav>
+    <main>
+        <h2>Annuaire des membres adhérents</h2>
+
+        <div class="menu-deroulant">
+            <ul>
+                <li>
+                    <a href="">Membres <i class="fa-sharp fa-solid fa-caret-down"></i></a>
+                    <ul class="liste">
+                        <li><a href="{% url 'List_Général' %}">Tous les membres</a></li>
+                        <li><a href="{% url 'Liste_lauréats' %}">Lauréats</a></li>
+                        <li><a href="{% url 'Liste_membre_de_la_family' %}">Membre de la family</a></li>
+                        <li><a href="{% url 'Liste_membre_adhérent' %}">Membre adhérents</a></li>
+                        <li><a href="{% url 'Liste_partenaire' %}">Partenaires</a></li>
+                        <li><a href="{% url 'Liste_elders' %}">Ainés</a></li>
+                        <li><a href="{% url 'Autres' %}">Autres</a></li>
+                        <li><a href="{% url 'Mentor' %}">Mentors</a></li>
+                        <li><a href="{% url 'Bénévoles' %}">Bénévoles</a></li>
+                    </ul>
+                </li> 
+            </ul>
+        </div>
+
+        <div class="champ-filtre">
+          <form method = 'get' action="{% url 'Liste_membre_adhérent' %}" class="form" id = "form">
+            <div class="champ">
+            <div class="Block1">
+            <div class="Diplôme">
+                <label for="diplôme">Diplôme : </label>
+                <select id="diplôme" name="diplôme" onchange="checkOther(this, 'DiplômeInput')">
+                    <option value=""></option>
+                    <option value="Maîtrise">Maîtrise</option>
+                    <option value="Doctorat">Doctorat</option>
+                    <option value="Diplôme d'ingénieur">Diplôme d'ingénieur</option>
+                    <option value="Baccalauréat">Baccalauréat</option>
+                    <option value="Master">Master</option>
+                    <option value="Licence">Licence</option>
+                    <option value="BEPC">BEPC</option>
+                    <option value="BTS">BTS</option>
+                    <option value="DUT">DUT</option>
+                    <option value="Autre">Autre</option>
+                </select>
+                <input type="text" id="DiplômeInput" name="Diplôme" class="hidden" placeholder="Saisissez ou choisissez..." />
+            </div>
+            <div class="région_origine">
+                <label for="région_origine">Région d'origine : </label>
+                 <select name="région_origine" id="région_origine">
+                    <option value=""></option>
+                    <option value="Adamaoua">Adamaoua</option>
+                    <option value="Est">Est</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Extrême-Nord">Extrême-Nord</option>
+                    <option value="Littoral">Littoral</option>
+                    <option value="Nord-Ouest">Nord-Ouest</option>
+                    <option value="Ouest">Ouest</option>
+                    <option value="Sud">Sud</option>
+                    <option value="Sud-Ouest">Sud-Ouest</option>
+                 </select>
+            </div>
+            
+            <div class="sexe">
+                <label for="sexe">Sexe : </label>
+                 <select name="sexe" id="sexe">
+                    <option value=""></option>
+                    <option value="F">F</option>
+                    <option value="M">M</option>
+                 </select>
+            </div>
+
+            <div class="age">
+                <label for="age">Age : </label>
+                 <select name="age" id="age">
+                    <option value=""></option>
+                    <option value="18-25 ans">18-25 ans</option>
+                    <option value="26-30 ans">26-30 ans</option>
+                    <option value="31-35 ans">31-35 ans</option>
+                    <option value="Supérieur à 35 ans">Supérieur à 35 ans</option>
+                 </select>
+            </div>
+            <div class="profession">
+                <label for="profession">Profession : </label>
+                 <select name="profession" id="profession" onchange="checkOtherProfession(this, 'ProfessionInput')">
+                    <option value=""></option>
+                    <option value="Étudiant">Étudiant</option>
+                    <option value="Enseignant">Enseignant</option>
+                    <option value="Avocat">Avocat</option>
+                    <option value="Médecin">Médecin</option>
+                    <option value="Professionnel en marketing">Professionnel en marketing</option>
+                    <option value="Ingénieur agricole">Ingénieur agricole</option>
+                    <option value="Entrepreneur">Entrepreneur</option>
+                    <option value="Responsable ressources humaines">Responsable ressources humaines</option>
+                    <option value="Ingénieur qualité">Ingénieur qualité</option>
+                    <option value="Journaliste">Journaliste</option>
+                    <option value="Artiste">Artiste</option>
+                    <option value="Personnel de santé">Personnel de santé</option>
+                    <option value="Sans emploi">Sans emploi</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="ProfessionInput" name="Profession" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+        </div>
+
+        <div class="Block2">
+            
+
+            <div class="secteur">
+                <label for="secteur">Secteur : </label>
+                 <select name="secteur" id="secteur">
+                    <option value=""></option>
+                    <option value="Public">Public</option>
+                    <option value="Privé">Privé</option>
+                 </select>
+            </div>
+
+            <div class="secteur_activité">
+                <label for="secteur_activité">Secteur d'activité : </label>
+                 <select name="secteur_activité" id="secteur_activité" onchange="checkOtherSecteur(this, 'SecteurInput')">
+                    <option value=""></option>
+                    <option value="Economie">Economie</option>
+                    <option value="Santé">Santé</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Baccalauréat">Baccalauréat</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Politique">Politique</option>
+                    <option value="Agro-alimentaire">Agro-alimentaire</option>
+                    <option value="Entrepreneuriat">Entrepreneuriat</option>
+                    <option value="Société_civile">Société civile</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Hôtellerie">Hôtellerie</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="SecteurInput" name="Secteur_activité" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+
+            <div class="pays_de_résidence">
+                <label for="pays_de_résidence">Pays de résidence : </label>
+                 <select name="pays_de_résidence" id="pays_de_résidence" onchange="checkOtherPaysResidence(this, 'PaysResidenceInput')">
+                    <option value=""></option>
+                    <option value="Cameroun">Cameroun</option>
+                    <option value="France">France</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Belgique">Belgique</option>
+                    <option value="Luxemburg">Luxemburg</option>
+                    <option value="Licence">Licence</option>
+                    <option value="USA">USA</option>
+                    <option value="Angleterre">Angleterre</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="PaysResidenceInput" name="pays_de_résidence" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+
+            <div class="région_de_résidence">
+                <label for="région_de_résidence">Région de résidence : </label>
+                 <select name="région_de_résidence" id="région_de_résidence">
+                    <option value=""></option>
+                    <option value="Adamaoua">Adamaoua</option>
+                    <option value="Est">Est</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Extrême-Nord">Extrême-Nord</option>
+                    <option value="Littoral">Littoral</option>
+                    <option value="Nord-Ouest">Nord-Ouest</option>
+                    <option value="Ouest">Ouest</option>
+                    <option value="Sud">Sud</option>
+                    <option value="Sud-Ouest">Sud-Ouest</option>
+                 </select>
+            </div>
+
+            <div class="département_de_résidence">
+                <label for="département_de_résidence">Département de résidence : </label>
+                 <select name="département_de_résidence" id="département_de_résidence" onchange="checkOtherDepartement(this, 'DepartementInput')">
+                    <option value=""></option>
+                    <option value="Bamboutos">Bamboutos</option>
+                    <option value="Bénoué">Bénoué</option>
+                    <option value="Boumba-et-Ngoko">Boumba-et-Ngoko</option>
+                    <option value="Boyo">Boyo</option>
+                    <option value="Bui">Bui</option>
+                    <option value="Diamaré">Diamaré</option>
+                    <option value="Dja-et-Lobo">Dja et Lobo</option>
+                    <option value="Djérem">Djérem</option>
+                    <option value="Donga-Mantung">Donga-Mantung</option>
+                    <option value="Fako">Fako</option>
+                    <option value="Faro">Faro</option>
+                    <option value="Faro-et-Déo">Faro-et-Déo</option>
+                    <option value="Haute-Sanaga">Haute-Sanaga</option>
+                    <option value="Haut-Nkam">Haut-Nkam</option>
+                    <option value="Haut-Nyong">Haut-Nyong</option>
+                    <option value="Hauts-Plateaux">Hauts-Plateaux</option>
+                    <option value="Kadey">Kadey</option>
+                    <option value="Koung-Khi">Koung-Khi</option>
+
+                    <option value="Koupé-Manengouba">Koupé-Manengouba</option>
+                    <option value="Lebialem">Lebialem</option>
+                    <option value="Lekié">Lekié</option>
+                    <option value="Logone-et-chari">Logone-et-chari</option>
+                    <option value="Lom-et-Djérem">Lom-et-Djérem</option>
+                    <option value="Manyu">Manyu</option>
+                    <option value="Mayo-Banyo">Mayo-Banyo</option>
+                    <option value="Mayo-Danay">Mayo-Danay</option>
+                    <option value="Mayo-Kani">Mayo-Kani</option>
+
+                    <option value="Noun">Noun</option>
+                    <option value="Vina">Vina</option>
+                    <option value="Océan">Océan</option>
+                    <option value="Sanaga-Maritime">Sanaga-Maritime</option>
+                    <option value="Wouri">Wouri</option>
+                    <option value="Nkam">Nkam</option>
+                    <option value="Ndé">Ndé</option>
+                    <option value="Mvila">Mvila</option>
+                    <option value="Moungo">Moungo</option>
+
+                    <option value="Menoua">Menoua</option>
+                    <option value="Mezam">Mezam</option>
+                    <option value="Mfoundi">Mfoundi</option>
+                    <option value="Mifi">Mifi</option>
+                    <option value="Méfou-et-Akono">Méfou-et-Akono</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="DepartementInput" name="département_de_résidence" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+            <div class="nbre_lignes">
+                <label for="nbre_lignes"> Nombre de membres :</label>
+                <input type="number" name="entier" min="1" step="1" id="nbre_lignes">
+
+            </div>
+        </div>
+    </div>
+        <div class="buttons">
+            <button id="export-button" name = "export" class="btn btn-success" value="1">Télécharger</button>
+            <button type="button" id="reset-button" class="btn btn-secondary">Réinitialiser</button>
+            
+        </div>
+          </form>
+        </div>
+
+        <script>
+            function checkOther(selectElement, inputId) {
+                const inputField = document.getElementById(inputId);
+                if (selectElement.value === "Autre") {
+                    inputField.classList.remove("hidden");
+                } else {
+                    inputField.classList.add("hidden");
+                }
+            }
+
+            
+               function checkOtherAnnee(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherProfession(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherSecteur(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherPaysResidence(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherDepartement(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+                document.getElementById("reset-button").addEventListener("click", function() {
+                // Réinitialiser tous les champs du formulaire
+                document.getElementById("form").reset();
+
+                // Recharger la page sans paramètres dans l'URL
+                window.location.href = window.location.pathname;
+            });
+
+            document.getElementById("entier").addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9]/g, "");  
+            });
+        </script>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone1</th>
+                    <th>Email</th>
+                    <th>Diplôme</th>
+                    <th>Sexe</th>
+                    <th>Age</th>
+                    <th>Profession</th>
+                    <th>Structure</th>
+                    <th>Secteur</th>
+                    <th>Secteur d'activité</th>
+                    <th>Pays de résidence</th>
+                    <th>Région de résidence</th>
+                    <th>Département de résidence</th>
+                    <th>Ville de résidence</th>
+                    <th>Région d'origine</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in page_obj %}
+                <tr>
+                    <td>{{ row.prénom }}</td>
+                    <td>{{ row.nom }}</td>
+                    <td>{{ row.téléphone1 }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.diplôme }}</td>
+                    <td>{{ row.sexe }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.profession }}</td>
+                    <td>{{ row.structure }}</td>
+                    <td>{{ row.secteur }}</td>
+                    <td>{{ row.secteur_activité }}</td>
+                    <td>{{ row.pays_de_résidence }}</td>
+                    <td>{{ row.région_de_résidence }}</td>
+                    <td>{{ row.département_de_résidence }}</td>
+                    <td>{{ row.ville_de_résidence }}</td>
+                    <td>{{ row.région_origine }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+</main>
+        <footer class="foot">
+            <div class="footer-bot">
+            <img src="{% static 'images\the-okwelians.png' %}" alt="">
+              <p>&copy; The Okwelians</p>
+            </div>
+          </footer>
+        
+    </body>
+</html>

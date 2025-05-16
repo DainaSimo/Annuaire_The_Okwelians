@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Annuaire</title>
+        <link rel="stylesheet" type="text/css"  href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+                        *{ 
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            } 
+
+            html,body{
+                width: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-color: rgb(230, 231, 231);
+                height: 100%;
+                min-height: 100vh;
+            }
+            nav{
+                width: 100%;
+                background-color: #fff;
+                height: 70px;
+                top: 0;
+                position: sticky;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            ul{
+                list-style: none;
+            }
+
+            ul li{
+                display: inline-block;
+                position: relative;
+                width: 200px;
+                
+            }
+
+            ul li a {
+                display: block;
+                padding: 10px;
+                color: black;
+                text-decoration: none;
+                text-align: center;
+                font-size: 15px;
+                margin-right: 2em;
+            }
+
+            ul li ul.liste li{
+                display: block;
+            }
+
+            ul li ul.liste{
+                width: 200px;
+                background:#fff ;
+                position: absolute;
+                z-index: 999;
+                display: none;
+            }
+
+            ul li a:hover{
+                background: #fff;
+            }
+            ul li:hover ul.liste{
+                display: block;
+            }
+
+            img{
+                width: 100px;
+                height: 80px;
+               
+            }
+
+            .logo{
+                position: absolute;
+                left: 40px;
+            }
+            .menu-deroulant{
+                position: absolute;
+                left: 200px;
+            }
+            
+            .connexion{
+                 position: absolute;
+                 right: 90px;
+                 background-color: rgb(242, 179, 20);
+                 border-radius: 10px;
+                 width: 100px;
+                 height: 40px;
+                 text-align: center;
+                 display: flex;
+                 align-items: center;
+                 justify-content: center;
+            }
+            .connexion a{
+                 text-decoration: none;
+                 color: #fff;
+                 
+            }
+
+            .search-bar {
+                display: flex;
+                align-items: center;
+                background-color: white;
+                border-radius: 100px;
+                overflow: hidden;
+                padding: 5px;
+                max-width: 400px;
+                width: 100%;
+                position: absolute;
+                left: 450px;
+                height: 50px;
+                border: 1px solid grey;
+               
+            }
+
+            .search-bar input {
+            border: none;
+            padding: 8px 10px;
+            outline: none;
+            flex-grow: 1;
+            }
+
+            .search-bar button {
+            border: none;
+            background-color: rgb(242, 179, 20);
+            color: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            }
+
+            /* Footer styles */
+            .footer {
+            background-color: #2c3e50; /* Couleur de fond */
+            color: white; /* Couleur du texte */
+            padding: 5px 0;
+            width: 800px;
+            position: absolute;
+            bottom: 0;
+            height: auto;
+            left: 240px;
+            }
+
+            .footer-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 5px;
+            }
+
+            .footer-container div {
+            flex: 1;
+            margin: 5px;
+            min-width: 250px;
+            }
+
+            .footer h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #ecf0f1;
+            }
+
+            .footer p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #bdc3c7;
+            }
+
+            .footer-links ul {
+            list-style-type: none;
+            padding: 0;
+            }
+
+            
+
+            .footer-links ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            }
+
+            .footer-links ul li a:hover {
+            color: #3498db;
+            text-decoration: none;
+            }
+
+            .footer-bottom {
+            text-align: center;
+            padding: 5px;
+            border-top: 1px solid #bdc3c7;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            }
+          .footer-about img{
+                 width: 50px;
+                 height: 40px;
+          }
+    </style>
+   
+    </head>
+    <body>
+        <nav>
+                <div class="logo">
+                    <img src="{% static 'images\Logo-Okwelians-removebg-preview.png' %}" alt="">
+                </div>
+                <div class="menu-deroulant">
+                    <ul>
+                        <li>
+                            <a href="">Catégories <i class="fa-sharp fa-solid fa-caret-down"></i></a>
+                            <ul class="liste">
+                                <li><a href="{% url 'home' %}">Général</a></li>
+                                <li><a href="{% url 'Lauréats' %}">Lauréats</a></li>
+                                <li><a href="{% url 'Membre_de_la_family' %}">Membre de la family</a></li>
+                                <li><a href="{% url 'Membre_adhérent' %}">Membre adhérent</a></li>
+                                <li><a href="{% url 'Partenaire' %}">Partenaire</a></li>
+                                <li><a href="{% url 'Elders' %}">Elders</a></li>
+                                <li><a href="{% url 'Autres' %}">Autres</a></li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Qui recherchez-vous?" aria-label="Rechercher">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div> 
+                <div class="connexion"><a href="">Se connecter</a></div> 
+        </nav>
+        <footer class="footer">
+            <div class="footer-container">
+              <!-- Section Informations -->
+              <div class="footer-about">
+                <h4>À propos</h4>
+                <p>
+                  Bienvenue sur l'annuaire de The Okwelians.
+                </p>
+                <img src="{% static 'images\the-okwelians.png' %}" alt="">
+              </div>
+        
+              <!-- Section Liens rapides -->
+              <div class="footer-links">
+                <h4>Liens rapides</h4>
+                <ul>
+                  <li><a href="{% url 'home' %}">Accueil</a></li>
+                </ul>
+              </div>
+        
+              </div>
+            </div>
+            <div class="footer-bottom">
+              <p>&copy; The Okwelians | Mentions légales | Politique de confidentialité</p>
+            </div>
+          </footer>  
+    </body>
+</html>
