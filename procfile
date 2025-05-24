@@ -1,1 +1,1 @@
-web: gunicorn Annuaire_The_Okwelians.wsgi
+web: gunicorn project.wsgi
