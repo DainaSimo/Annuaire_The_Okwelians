@@ -1,0 +1,877 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Annuaire | The Okwelians</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- FontAwesome & Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #f4f6f8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #fff;
+            box-shadow: 0 4px 18px rgba(242,179,20,0.10);
+            padding: 0;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 4px solid rgb(242, 179, 20);
+            z-index: 1000;
+        }
+
+        .logo {
+            padding-left: 2rem;
+        }
+
+        .logo img {
+            width: 75px;
+            height: auto;
+        }
+
+        .menu-deroulant {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin: 0;
+            padding: 0 2rem;
+        }
+
+        .menu-deroulant a {
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .menu-deroulant a:hover {
+            background: rgb(242, 179, 20);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .connexion {
+            margin-right: 0.1rem;
+            background: rgb(242, 179, 20);
+            padding: 12px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(242,179,20,0.2);
+            width: 170px;
+        }
+
+        .connexion a {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        *{ 
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} 
+
+html,body{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(230, 231, 231);
+    height: 100%;
+    min-height: 210vh;
+    display: flex;
+    flex-direction: column;
+}
+
+ul{
+    list-style: none;
+}
+
+ul li{
+    display: inline-block;
+    position: relative;
+    width: 230px;
+    
+}
+
+ul li a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    margin-right: 2em;
+}
+
+ul li ul.liste li{
+    display: flex;
+}
+
+
+ul li ul.liste li a:hover{
+    background-color: rgb(242, 179, 20);
+    color: #fff;
+}
+
+
+ul li ul.liste li img{
+    width: 30px;
+    height: 30px;
+}
+
+ul li ul.liste li img:hover{
+    background-color: rgb(242, 179, 20);
+}
+
+ul li ul.liste{
+    width: 270px;
+    background:#fff ;
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    border-radius: 0.5em;
+    box-shadow:#333;
+}
+
+ul li a:hover{
+    background: #fff;
+}
+ul li:hover ul.liste{
+    display: block;
+}
+
+img{
+    width: 80px;
+    height: 70px;
+   
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 200px;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.menu .Annuaire, .ressource{
+    margin-right: 20px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover{
+    color: rgb(242, 179, 20);
+} 
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 100px;
+    overflow: hidden;
+    padding: 5px;
+    max-width: 400px;
+    width: 100%;
+    position: absolute;
+    left: 450px;
+    height: 50px;
+    border: 1px solid grey;
+   
+}
+
+.search-bar input {
+border: none;
+padding: 8px 10px;
+outline: none;
+flex-grow: 1;
+}
+
+.search-bar button {
+border: none;
+background-color: rgb(242, 179, 20);
+color: white;
+padding: 8px 12px;
+cursor: pointer;
+font-size: 1rem;
+position: absolute;
+right: 5px;
+}
+
+/* Footer styles */
+.foot {
+        background: #222;
+        color: #fff;
+        padding: 2rem 0;
+        margin-top: auto;
+        width: 100%;
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-bot {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .footer-bot img {
+        width: 60px;
+        height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .footer-bot p {
+        color: #fff;
+        margin: 0;
+        font-size: 1rem;
+    }
+
+table {
+        max-width: 100%;
+        border-collapse: collapse;
+        min-height: auto;
+        margin-top: 70px;
+        overflow-x: auto;
+        table-layout: fixed;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-bottom: 40px;
+        }
+
+ th, td {
+        padding: 8px;
+        text-align: left;
+        overflow: hidden;
+        font-size: 10px;
+        }
+th {
+        background-color: rgb(242, 179, 20);
+        color: #fff;
+        }
+
+ th, td {
+        word-wrap: break-word;
+    }
+
+    thead, tbody{
+         text-align: center;
+    }
+
+    main{
+        flex: 1; 
+    }
+    main h2{
+        text-align: center;
+        color: rgb(242, 179, 20);
+        font-size: 30px;
+        margin-top: 110px;
+    }
+
+   .hidden{
+        display: none;
+    }
+
+    .form{
+        display: block;
+        
+    }
+    .champ{
+        display: flex;
+    }
+ .Diplôme, .région_origine,.programme,.année, .sexe,.age,.profession, .secteur,.secteur_activité,.pays_de_résidence,.région_de_résidence,.département_de_résidence, .nbre_lignes{
+    margin-bottom: 25px;
+ }
+
+ #diplôme, #région_origine,#programme,#année, #sexe,#age,#profession, #secteur,#secteur_activité,#pays_de_résidence,#région_de_résidence,#département_de_résidence, #nbre_lignes{
+      height: 30px;
+      width: 400px;
+      display: block;
+ }
+    
+ .champ-filtre{
+    margin-top: 100px;
+    background-color: #fff;
+    margin: 50px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+ }
+
+ .Block2{
+     margin-left: 150px;
+ }
+
+  label{
+    margin-right: 15px;
+  } 
+  .button{
+    background-color: #fff;
+    margin-left: 350px;
+    width: 100px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 90px;
+  } 
+
+  .buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 85px;
+  }
+ 
+  .nbre_lignes{
+    position: absolute;
+    left: 500px;
+    display: block;
+  }
+
+  .menu{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 200px;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.menu .Annuaire, .ressource{
+    margin-right: 20px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover{
+    color: rgb(242, 179, 20);
+} 
+
+@media (max-width: 768px) {
+th, td {
+            font-size: 12px;
+            padding: 5px;
+        }
+    } 
+        </style>
+    </head>
+    <body>
+        <nav>
+        <div class="logo">
+            <img src="{% static 'images/Logo-Okwelians-removebg-preview.png' %}" alt="Logo Okwelians">
+        </div>
+        <div class="menu-deroulant">
+            <a href="{% url 'List_Général' %}" class="Annuaire">Annuaire des membres</a>
+            <a href="{% url 'Liste_personne_ressource' %}" class="ressource">Personnes ressources</a>
+            <a href="{% url 'Liste_lauréats' %}">Extraire les contacts</a>
+            <a href="{% url 'Liste_lauréats' %}">Gerer les utilisateurs</a>
+            <a href="{% url 'Liste_lauréats' %}">Tableau de bord</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <h2>Lauréats</h2>
+        <div class="menu-deroulant">
+            <ul>
+                <li>
+                    <a href="">Membres <i class="fa-sharp fa-solid fa-caret-down"></i></a>
+                    <ul class="liste">
+                        <li><a href="{% url 'List_Général' %}">Tous les membres</a></li>
+                        <li><a href="{% url 'Liste_lauréats' %}">Lauréats</a></li>
+                        <li><a href="{% url 'Liste_membre_de_la_family' %}">Membre de la family</a></li>
+                        <li><a href="{% url 'Liste_membre_adhérent' %}">Membre adhérents</a></li>
+                        <li><a href="{% url 'Liste_partenaire' %}">Partenaires</a></li>
+                        <li><a href="{% url 'Liste_elders' %}">Ainés</a></li>
+                        <li><a href="{% url 'Liste_autres' %}">Autres</a></li>
+                        <li><a href="{% url 'Mentor' %}">Mentors</a></li>
+                        <li><a href="{% url 'Bénévoles' %}">Bénévoles</a></li>
+                    </ul>
+                </li> 
+            </ul>
+        </div>
+           
+        <div class="champ-filtre">
+          <form method = 'get' action="{% url 'Liste_lauréats' %}" class="form" id = "form">
+            <div class="champ">
+            <div class="Block1">
+            <div class="Diplôme">
+                <label for="diplôme">Diplôme : </label>
+                <select id="diplôme" name="diplôme" onchange="checkOther(this, 'DiplômeInput')">
+                    <option value=""></option>
+                    <option value="Maîtrise">Maîtrise</option>
+                    <option value="Doctorat">Doctorat</option>
+                    <option value="Diplôme d'ingénieur">Diplôme d'ingénieur</option>
+                    <option value="Baccalauréat">Baccalauréat</option>
+                    <option value="Master">Master</option>
+                    <option value="Licence">Licence</option>
+                    <option value="BEPC">BEPC</option>
+                    <option value="BTS">BTS</option>
+                    <option value="DUT">DUT</option>
+                    <option value="Autre">Autre</option>
+                </select>
+                <input type="text" id="DiplômeInput" name="Diplôme" class="hidden" placeholder="Saisissez ou choisissez..." />
+            </div>
+            <div class="région_origine">
+                <label for="région_origine">Région d'origine : </label>
+                 <select name="région_origine" id="région_origine">
+                    <option value=""></option>
+                    <option value="Adamaoua">Adamaoua</option>
+                    <option value="Est">Est</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Extrême-Nord">Extrême-Nord</option>
+                    <option value="Littoral">Littoral</option>
+                    <option value="Nord-Ouest">Nord-Ouest</option>
+                    <option value="Ouest">Ouest</option>
+                    <option value="Sud">Sud</option>
+                    <option value="Sud-Ouest">Sud-Ouest</option>
+                 </select>
+            </div>
+
+            <div class="programme">
+                <label for="programme">Programme : </label>
+                 <select name="programme" id="programme">
+                    <option value=""></option>
+                    <option value="OFYCL">OFYCL</option>
+                    <option value="O'100">O'100</option>
+                    <option value="BDS">BDS</option>
+                    <option value="MCCI">MCCI</option>
+                    <option value="Médiateurs de la démocratie">Médiateurs de la démocratie</option>
+                 </select>
+            </div>
+
+            <div class="année">
+                <label for="année">Année: </label>
+                 <select name="année" id="année" onchange="checkOtherAnnee(this, 'AnnéeInput')">
+                    <option value=""></option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="number" id="AnnéeInput" name="Annee" class="hidden"  min="1900" max="2100" placeholder="Ex : 2025">
+            </div>
+            
+            <div class="sexe">
+                <label for="sexe">Sexe : </label>
+                 <select name="sexe" id="sexe">
+                    <option value=""></option>
+                    <option value="F">F</option>
+                    <option value="M">M</option>
+                 </select>
+            </div>
+
+            <div class="age">
+                <label for="age">Age : </label>
+                 <select name="age" id="age">
+                    <option value=""></option>
+                    <option value="18-25 ans">18-25 ans</option>
+                    <option value="26-30 ans">26-30 ans</option>
+                    <option value="31-35 ans">31-35 ans</option>
+                    <option value="Supérieur à 35 ans">Supérieur à 35 ans</option>
+                 </select>
+            </div>
+        </div>
+
+        <div class="Block2">
+            <div class="profession">
+                <label for="profession">Profession : </label>
+                 <select name="profession" id="profession" onchange="checkOtherProfession(this, 'ProfessionInput')">
+                    <option value=""></option>
+                    <option value="Étudiant">Étudiant</option>
+                    <option value="Enseignant">Enseignant</option>
+                    <option value="Avocat">Avocat</option>
+                    <option value="Médecin">Médecin</option>
+                    <option value="Professionnel en marketing">Professionnel en marketing</option>
+                    <option value="Ingénieur agricole">Ingénieur agricole</option>
+                    <option value="Entrepreneur">Entrepreneur</option>
+                    <option value="Responsable ressources humaines">Responsable ressources humaines</option>
+                    <option value="Ingénieur qualité">Ingénieur qualité</option>
+                    <option value="Journaliste">Journaliste</option>
+                    <option value="Artiste">Artiste</option>
+                    <option value="Personnel de santé">Personnel de santé</option>
+                    <option value="Sans emploi">Sans emploi</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="ProfessionInput" name="Profession" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+
+            <div class="secteur">
+                <label for="secteur">Secteur : </label>
+                 <select name="secteur" id="secteur">
+                    <option value=""></option>
+                    <option value="Public">Public</option>
+                    <option value="Privé">Privé</option>
+                 </select>
+            </div>
+
+            <div class="secteur_activité">
+                <label for="secteur_activité">Secteur d'activité : </label>
+                 <select name="secteur_activité" id="secteur_activité" onchange="checkOtherSecteur(this, 'SecteurInput')">
+                    <option value=""></option>
+                    <option value="Economie">Economie</option>
+                    <option value="Santé">Santé</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Baccalauréat">Baccalauréat</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Politique">Politique</option>
+                    <option value="Agro-alimentaire">Agro-alimentaire</option>
+                    <option value="Entrepreneuriat">Entrepreneuriat</option>
+                    <option value="Société_civile">Société civile</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Hôtellerie">Hôtellerie</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="SecteurInput" name="Secteur_activité" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+
+            <div class="pays_de_résidence">
+                <label for="pays_de_résidence">Pays de résidence : </label>
+                 <select name="pays_de_résidence" id="pays_de_résidence" onchange="checkOtherPaysResidence(this, 'PaysResidenceInput')">
+                    <option value=""></option>
+                    <option value="Cameroun">Cameroun</option>
+                    <option value="France">France</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Belgique">Belgique</option>
+                    <option value="Luxemburg">Luxemburg</option>
+                    <option value="Licence">Licence</option>
+                    <option value="USA">USA</option>
+                    <option value="Angleterre">Angleterre</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="PaysResidenceInput" name="pays_de_résidence" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+
+            <div class="région_de_résidence">
+                <label for="région_de_résidence">Région de résidence : </label>
+                 <select name="région_de_résidence" id="région_de_résidence">
+                    <option value=""></option>
+                    <option value="Adamaoua">Adamaoua</option>
+                    <option value="Est">Est</option>
+                    <option value="Centre">Centre</option>
+                    <option value="Extrême-Nord">Extrême-Nord</option>
+                    <option value="Littoral">Littoral</option>
+                    <option value="Nord-Ouest">Nord-Ouest</option>
+                    <option value="Ouest">Ouest</option>
+                    <option value="Sud">Sud</option>
+                    <option value="Sud-Ouest">Sud-Ouest</option>
+                 </select>
+            </div>
+
+            <div class="département_de_résidence">
+                <label for="département_de_résidence">Département de résidence : </label>
+                 <select name="département_de_résidence" id="département_de_résidence" onchange="checkOtherDepartement(this, 'DepartementInput')">
+                    <option value=""></option>
+                    <option value="Bamboutos">Bamboutos</option>
+                    <option value="Bénoué">Bénoué</option>
+                    <option value="Boumba-et-Ngoko">Boumba-et-Ngoko</option>
+                    <option value="Boyo">Boyo</option>
+                    <option value="Bui">Bui</option>
+                    <option value="Diamaré">Diamaré</option>
+                    <option value="Dja-et-Lobo">Dja et Lobo</option>
+                    <option value="Djérem">Djérem</option>
+                    <option value="Donga-Mantung">Donga-Mantung</option>
+                    <option value="Fako">Fako</option>
+                    <option value="Faro">Faro</option>
+                    <option value="Faro-et-Déo">Faro-et-Déo</option>
+                    <option value="Haute-Sanaga">Haute-Sanaga</option>
+                    <option value="Haut-Nkam">Haut-Nkam</option>
+                    <option value="Haut-Nyong">Haut-Nyong</option>
+                    <option value="Hauts-Plateaux">Hauts-Plateaux</option>
+                    <option value="Kadey">Kadey</option>
+                    <option value="Koung-Khi">Koung-Khi</option>
+
+                    <option value="Koupé-Manengouba">Koupé-Manengouba</option>
+                    <option value="Lebialem">Lebialem</option>
+                    <option value="Lekié">Lekié</option>
+                    <option value="Logone-et-chari">Logone-et-chari</option>
+                    <option value="Lom-et-Djérem">Lom-et-Djérem</option>
+                    <option value="Manyu">Manyu</option>
+                    <option value="Mayo-Banyo">Mayo-Banyo</option>
+                    <option value="Mayo-Danay">Mayo-Danay</option>
+                    <option value="Mayo-Kani">Mayo-Kani</option>
+
+                    <option value="Noun">Noun</option>
+                    <option value="Vina">Vina</option>
+                    <option value="Océan">Océan</option>
+                    <option value="Sanaga-Maritime">Sanaga-Maritime</option>
+                    <option value="Wouri">Wouri</option>
+                    <option value="Nkam">Nkam</option>
+                    <option value="Ndé">Ndé</option>
+                    <option value="Mvila">Mvila</option>
+                    <option value="Moungo">Moungo</option>
+
+                    <option value="Menoua">Menoua</option>
+                    <option value="Mezam">Mezam</option>
+                    <option value="Mfoundi">Mfoundi</option>
+                    <option value="Mifi">Mifi</option>
+                    <option value="Méfou-et-Akono">Méfou-et-Akono</option>
+                    <option value="Autre">Autre</option>
+                 </select>
+                 <input type="text" id="DepartementInput" name="département_de_résidence" class="hidden"  placeholder="Saisissez une valeur...">
+            </div>
+            <div class="nbre_lignes">
+                <label for="nbre_lignes"> Nombre de lauréats :</label>
+                <input type="number" name="entier" min="1" step="1" id="nbre_lignes">
+
+            </div>
+        </div>
+    </div>
+        <div class="buttons">
+            <button id="export-button" name = "export" class="btn btn-success" value="1">Télécharger</button>
+            <button type="button" id="reset-button" class="btn btn-secondary">Réinitialiser</button>
+            
+        </div>
+          </form>
+        </div>
+
+        <script>
+            function checkOther(selectElement, inputId) {
+                const inputField = document.getElementById(inputId);
+                if (selectElement.value === "Autre") {
+                    inputField.classList.remove("hidden");
+                } else {
+                    inputField.classList.add("hidden");
+                }
+            }
+
+            
+               function checkOtherAnnee(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherProfession(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherSecteur(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherPaysResidence(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+
+                function checkOtherDepartement(selectElement, inputId){
+                  const inputField = document.getElementById(inputId);
+                  if (selectElement.value === "Autre"){
+                    inputField.classList.remove('hidden');
+                  } else {
+                    inputField.classList.add("hidden");
+                  }
+                }
+                document.getElementById("reset-button").addEventListener("click", function() {
+                // Réinitialiser tous les champs du formulaire
+                document.getElementById("form").reset();
+
+                // Recharger la page sans paramètres dans l'URL
+                window.location.href = window.location.pathname;
+            });
+
+            document.getElementById("entier").addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9]/g, "");  
+            });
+        </script>
+    <div class="table-responsive">
+        <div class="search-bar">
+            <form method="get" action="{% url 'Liste_lauréats' %}">
+                <input type="text" placeholder="Entrez le nom" aria-label="Rechercher" name="recherche">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+                    
+        </div>
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Téléphone1</th>
+                    <th>Email</th>
+                    <th>Diplôme</th>
+                    <th>Sexe</th>
+                    <th>Age</th>
+                    <th>Profession</th>
+                    <th>Secteur d'activité</th>
+                    <th>Pays de résidence</th>
+                    <th>Ville de résidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in page_obj %}
+                <tr>
+                    <td>{{ row.prénom }}</td>
+                    <td>{{ row.nom }}</td>
+                    <td>{{ row.téléphone1 }}</td>
+                    <td>{{ row.email }}</td>
+                    <td>{{ row.diplôme }}</td>
+                    <td>{{ row.sexe }}</td>
+                    <td>{{ row.age }}</td>
+                    <td>{{ row.profession }}</td>
+                    <td>{{ row.secteur_activité }}</td>
+                    <td>{{ row.pays_de_résidence }}</td>
+                    <td>{{ row.ville_de_résidence }}</td>
+                   <td>
+                    <!-- Bouton Modifier -->
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modifierModal{{ row.email }}">
+                        Modifier
+                    </button>
+                </td>
+                </tr>
+                
+                        <!-- Fenêtre Modale (Modal) -->
+                <div class="modal fade" id="modifierModal{{ row.email}}" tabindex="-1" aria-labelledby="modifierModalLabel{{ row.email}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modifierModalLabel{{ row.email }}">Modifier Contact</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label class="form-label">Prénom :</label>
+                                        <input type="text" name="prénom" class="form-control" value="{{ row.prénom }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nom :</label>
+                                        <input type="text" name="nom" class="form-control" value="{{ row.nom }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Téléphone1 :</label>
+                                        <input type="text" name="téléphone1" class="form-control" value="{{ row.téléphone1 }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Email :</label>
+                                        <input type="email" name="email" class="form-control" value="{{ row.email }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Diplôme :</label>
+                                        <input type="text" name="diplôme" class="form-control" value="{{ row.diplôme }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Sexe :</label>
+                                        <input type="text" name="sexe" class="form-control" value="{{ row.sexe}}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Age :</label>
+                                        <input type="text" name="age" class="form-control" value="{{ row.age }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Profession :</label>
+                                        <input type="text" name="profession" class="form-control" value="{{ row.profession }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Structure :</label>
+                                        <input type="text" name="structure" class="form-control" value="{{ row.structure }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Secteur :</label>
+                                        <input type="text" name="secteur" class="form-control" value="{{ row.secteur }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Secteur d'activité:</label>
+                                        <input type="text" name="secteur_activité" class="form-control" value="{{ row.secteur_activité }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Pays de résidence :</label>
+                                        <input type="text" name="pays_de_résidence" class="form-control" value="{{ row.pays_de_résidence }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Région de résidence :</label>
+                                        <input type="text" name="région_de_résidence" class="form-control" value="{{ row.région_de_résidence }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Département de résidence :</label>
+                                        <input type="text" name="département_de_résidence" class="form-control" value="{{ row.département_de_résidence }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Ville de résidence :</label>
+                                        <input type="text" name="ville_de_résidence" class="form-control" value="{{ row.ville_de_résidence }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Région d'origine :</label>
+                                        <input type="text" name="région_origine" class="form-control" value="{{ row.région_origine }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Programme :</label>
+                                        <input type="text" name="programme" class="form-control" value="{{ row.programme }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Année :</label>
+                                        <input type="text" name="année" class="form-control" value="{{ row.année }}" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <footer class="foot">
+    <div class="footer-bot">
+        <img src="{% static 'images/the-okwelians.png' %}" alt="Logo The Okwelians">
+        <p>&copy; The Okwelians {{ now|date:"Y" }}</p>
+    </div>
+</footer>
+        
+    </body>
+</html>

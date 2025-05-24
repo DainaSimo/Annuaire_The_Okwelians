@@ -1,0 +1,647 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Annuaire | The Okwelians</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- FontAwesome & Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background-color: #f4f6f8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #fff;
+            box-shadow: 0 4px 18px rgba(242,179,20,0.10);
+            padding: 0;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            border-bottom: 4px solid rgb(242, 179, 20);
+            z-index: 1000;
+        }
+
+        .logo {
+            padding-left: 2rem;
+        }
+
+        .logo img {
+            width: 75px;
+            height: auto;
+        }
+
+        .menu-deroulant {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin: 0;
+            
+        }
+
+        .menu-deroulant a {
+            color: #333;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .menu-deroulant a:hover {
+            background: rgb(242, 179, 20);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .connexion {
+          
+            background: rgb(242, 179, 20);
+           position: absolute;
+           right: 0%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(242,179,20,0.2);
+            width: 170px;
+        }
+
+        .connexion a {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        @media (max-width: 1200px) {
+            .menu-deroulant {
+                gap: 1.5rem;
+            }
+            
+            .menu-deroulant a {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                height: auto;
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1.5rem;
+            }
+
+            .menu-deroulant {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                height: 0;
+                overflow: hidden;
+                transition: height 0.3s ease;
+                padding: 0;
+            }
+
+            .menu-deroulant.active {
+                height: auto;
+                padding: 1rem 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .menu-deroulant a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-radius: 0;
+            }
+
+            .connexion {
+                margin: 1rem auto;
+                text-align: center;
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                min-height: unset;
+                padding: 1rem 0.5rem;
+                gap: 0.7rem;
+                border-bottom-width: 3px;
+                width: 100vw;
+                max-width: 100vw;
+            }
+            .menu-deroulant {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .formulaire {
+                padding: 1rem 0.5rem;
+            }
+            .info-contact {
+                width: 95vw;
+            }
+            .connexion {
+                position: static;
+                transform: none;
+                margin-top: 0.7rem;
+                margin-bottom: 0.7rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        h2 {
+            text-align: center;
+            color: #222;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            margin-top: 1em;
+        }
+        .formulaire {
+            max-width: 900px;
+            margin: 0 auto 2.5rem auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2rem 2rem 1rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        .formulaire .input, .formulaire .input1 {
+            flex: 1 1 220px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background: #f8fafb;
+            transition: border 0.2s;
+        }
+        .formulaire .input:focus, .formulaire .input1:focus {
+            border: 1.5px solid rgb(242, 179, 20);
+            outline: none;
+        }
+        .formulaire button {
+            border: none;
+            background: rgb(242, 179, 20);
+            color: #fff;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: background 0.2s;
+        }
+        .formulaire button:hover {
+            background: #e1a900;
+        }
+        #search-results {
+            position: absolute;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            z-index: 10;
+            width: 90%;
+            left: 5%;
+            top: 100%;
+            display: none;
+        }
+        .result-item {
+            padding: 0.7rem 1rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .result-item:hover {
+            background: rgb(242, 179, 20, 0.15);
+        }
+        .cadre-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .info-contact {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            width: 320px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-contact:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(242,179,20,0.13);
+        }
+        .image-contact {
+            background: rgb(242, 179, 20);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+        }
+        .image-contact img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            object-fit: cover;
+            background: #fff;
+        }
+        .list-info-contact {
+            padding: 1.2rem 1.5rem 1rem 1.5rem;
+        }
+        .list-info-contact .nom {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #222;
+        }
+        .list-info-contact p {
+            margin: 0.3rem 0;
+            color: #444;
+            font-size: 0.98rem;
+        }
+        .list-info-contact .profession {
+            color: rgb(242, 179, 20);
+            font-style: italic;
+            font-size: 1rem;
+        }
+        .modal-okwelians .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .modal-okwelians .modal-header {
+            background: rgb(242, 179, 20);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            padding: 1.5rem;
+        }
+
+        .modal-okwelians .modal-title {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .modal-okwelians .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-okwelians .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .modal-okwelians .info-item {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .modal-okwelians .info-item:hover {
+            transform: translateY(-2px);
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(242,179,20,0.1);
+        }
+
+        .modal-okwelians .info-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .modal-okwelians .info-value {
+            color: #222;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .modal-okwelians .btn-close {
+            color: white;
+            opacity: 1;
+        }
+        main {
+            flex: 1 0 auto;
+            padding-top: 90px;
+            margin-bottom: 2rem;
+        }
+        
+        /* Footer modernisé */
+        .foot {
+            flex-shrink: 0;
+            background-color: #222;
+            height: 150px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .footer-bot {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-bot img {
+            width: 60px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .footer-bot p {
+            color: #fff;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 500px;
+}
+.step-links a, .step-links span {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+}
+.step-links .current {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border-color: #007bff;
+}
+.step-links a:hover {
+  background-color: #e0e0e0;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'images/Logo-Okwelians-removebg-preview.png' %}" alt="Logo Okwelians">
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-deroulant">
+            <a href="{% url 'List_Général' %}" class="Annuaire">Annuaire des membres</a>
+            <a href="{% url 'Liste_personne_ressource' %}" class="ressource">Personnes ressources</a>
+            <a href="{% url 'Liste_lauréats' %}">Extraire les contacts</a>
+            <a href="{% url 'Liste_lauréats' %}">Gerer les utilisateurs</a>
+            <a href="{% url 'Liste_lauréats' %}">Tableau de bord</a>
+        </div>
+    </nav>
+    <main>
+        <h2>Annuaire des membres de la communauté</h2>
+        <form method="get" action="{% url 'List_Général' %}" class="formulaire position-relative">
+            <input type="text" placeholder="Rechercher..." aria-label="Rechercher" name="recherche" value="{{query}}" class="input" id="search" autocomplete="off">
+            <select name="profession" class="input1">
+                <option value="">Toutes les professions</option>
+                {% for prof in professions %}
+                    {% if prof %}
+                    <option value="{{ prof }}" {% if prof == selected_profession %}selected{% endif %}>
+                        {{ prof }}
+                    </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type="submit" title="Rechercher"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div id="search-results"></div>
+        </form>
+        <div class="cadre-contact">
+            {% for row in page_obj %}
+            <div class="info-contact" 
+                 data-nom="{{ row.nom }}"
+                 data-prenom="{{ row.prénom }}"
+                 data-tel1="{{ row.téléphone1 }}"
+                 data-tel2="{{ row.téléphone2 }}"
+                 data-email="{{ row.email }}"
+                 data-sexe="{{ row.sexe }}"
+                 data-age="{{ row.age }}"
+                 data-diplôme="{{ row.diplôme }}"
+                 data-profession="{{ row.profession }}"
+                 data-structure="{{ row.structure }}"
+                 data-secteur="{{ row.secteur }}"
+                 data-secteur-activite="{{ row.secteur_activité }}"
+                 data-pays="{{ row.pays_de_résidence }}"
+                 data-departement="{{ row.département_de_résidence }}"
+                 data-ville="{{ row.ville_de_résidence }}"
+                 data-region="{{ row.région_origine }}"
+                 data-membership="{{ row.membership}}"
+                 data-pole_benevolat="{{ row.pole_benevolat}}"
+                 onclick="showContactDetails(this)">
+                <div class="image-contact">
+                    <img src="{% static 'images/visage.png' %}" alt="Photo de {{ row.nom }}">
+                </div>
+                <div class="list-info-contact">
+                    <p class="nom">{{ row.nom }} {{ row.prénom }}</p>
+                    <p>{{ row.téléphone1 }}</p>
+                    <p>{{ row.email }}</p>
+                    <p class="profession">{{ row.profession }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+  <span class="step-links">
+   
+
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo;</a>
+      <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        {% if num == page_obj.number %}
+          <span class="current">{{ num }}</span>
+        {% else %}
+          <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+    {% endif %}
+ <p>
+  Affichage de {{ page_obj.start_index }} à {{ page_obj.end_index }} sur {{ page_obj.paginator.count }} {{ page_obj.paginator.count|pluralize:"membre,membres" }}.
+</p>
+  </span>
+</div>
+    </main>
+    <footer class="foot">
+        <div class="footer-bot">
+            <img src="{% static 'images/the-okwelians.png' %}" alt="Logo The Okwelians">
+            <p>&copy; The Okwelians {{ now|date:"Y" }}</p>
+        </div>
+    </footer>
+    <div class="modal fade modal-okwelians" id="contactModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails du contact</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="info-grid" id="modalContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            this.classList.toggle('active');
+            const menu = document.querySelector('.menu-deroulant');
+            menu.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                const height = Array.from(menu.children).reduce((acc, el) => acc + el.offsetHeight, 0);
+                menu.style.height = `${height}px`;
+            } else {
+                menu.style.height = '0';
+            }
+        });
+
+        document.querySelectorAll('.menu-deroulant a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.hamburger').classList.remove('active');
+                document.querySelector('.menu-deroulant').classList.remove('active');
+                document.querySelector('body').style.overflow = 'auto';
+            });
+        });
+
+        // Click en dehors pour fermer
+        document.addEventListener('click', (e) => {
+            if (!document.querySelector('.menu-deroulant').contains(e.target) && !document.querySelector('.hamburger').contains(e.target)) {
+                document.querySelector('.hamburger').classList.remove('active');
+                document.querySelector('.menu-deroulant').classList.remove('active');
+                document.querySelector('body').style.overflow = 'auto';
+            }
+        });
+
+        $(document).ready(function(){
+            $("#search").keyup(function(){
+                let query = $(this).val();
+                if (query.length > 0) {
+                    $.ajax({
+                        url: "/",
+                        type: "GET",
+                        data: {'q': query},
+                        dataType: "json",
+                        success: function(data) {
+                            let results = data.results;
+                            let resultsDiv = $("#search-results");
+                            resultsDiv.empty().show();
+                            if (results.length > 0) {
+                                results.forEach(row => {
+                                    resultsDiv.append(`
+                                        <div class="result-item" onclick="selectResult('${row.nom}', '${row.email}')">
+                                            <strong>${row.nom}</strong> - ${row.email}
+                                        </div>
+                                    `);
+                                });
+                            } else {
+                                resultsDiv.append(`<div class="result-item">Aucun résultat</div>`);
+                            }
+                        }
+                    });
+                } else {
+                    $("#search-results").hide();
+                }
+            });
+        });
+        function selectResult(nom, email) {
+            $("#search").val(nom);
+            $("#search-results").hide();
+        }
+        function getContactData(id) {
+            const script = document.getElementById(id);
+            if (script) {
+                return JSON.parse(script.textContent);
+            }
+            return {};
+        }
+
+        function showContactDetails(element) {
+            const modal = new bootstrap.Modal(document.getElementById('contactModal'));
+            const modalContent = document.getElementById('modalContent');
+            
+            const fields = {
+                'Nom': element.dataset.nom,
+                'Prénom': element.dataset.prenom,
+                'Téléphone principal': element.dataset.tel1,
+                'Téléphone secondaire': element.dataset.tel2,
+                'Email': element.dataset.email,
+                'Sexe': element.dataset.sexe,
+                'Age': element.dataset.age,
+                'Diplôme' : element.dataset.diplôme,
+                'Profession': element.dataset.profession,
+                'Structure': element.dataset.structure,
+                'Secteur': element.dataset.secteur,
+                'Secteur d\'activité': element.dataset.secteurActivite,
+                'Pays': element.dataset.pays,
+                'Département': element.dataset.departement,
+                'Ville': element.dataset.ville,
+                'Région d\'origine': element.dataset.region,
+                'Membership': element.dataset.membership,
+                'Bénévolat': element.dataset.pole_benevolat
+            };
+
+            modalContent.innerHTML = Object.entries(fields)
+                .map(([label, value]) => `
+                    <div class="info-item">
+                        <div class="info-label">${label}</div>
+                        <div class="info-value">${value || '-'}</div>
+                    </div>
+                `).join('');
+
+            modal.show();
+        }
+    </script>
+</body>
+</html>
