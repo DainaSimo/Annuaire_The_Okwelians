@@ -1,0 +1,1 @@
+web: gunicorn Annuaire_The_Okwelians.wsgi
