@@ -21,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s6bn#9()!yq2b#*m&%558815)qvjf^t7rr3+t@d5eq9ry7gn0f'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY','django-insecure-s6bn#9()!yq2b#*m&%558815)qvjf^t7rr3+t@d5eq9ry7gn0f')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['ton-domaine.render.com', 'localhost']
+# Hôtes autorisés
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -79,11 +80,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Moteur MySQL pour Django
-        'NAME': 'the_okwelians',           # Nom de la base existante
-        'USER': 'root',          # Nom d'utilisateur MySQL
-        'PASSWORD': 'Annuaire',     # Mot de passe MySQL
-        'HOST': 'localhost',                  # Hôte (par défaut : localhost)
-        'PORT': '3306',                    # Port (par défaut : 3306)
+        'NAME': os.getenv('MYSQLDATABASE','the_okwelians'),           # Nom de la base existante
+        'USER': os.getenv('MYSQLUSER','root'),          # Nom d'utilisateur MySQL
+        'PASSWORD': os.getenv('MYSQLPASSWORD','Annuaire'),     # Mot de passe MySQL
+        'HOST': os.getenv('MYSQLHOST','localhost'),                  # Hôte (par défaut : localhost)
+        'PORT': os.getenv('MYSQLPORT','3306'),                    # Port (par défaut : 3306)
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",  # Mode strict (recommandé)
             'charset': 'utf8mb4'
