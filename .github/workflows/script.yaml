@@ -1,0 +1,27 @@
+name: Mon script toutes les 6 minutes
+
+on:
+  schedule:
+    - cron: "*/6 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: Installer les dépendances
+        run: |
+          pip install -r requirements.txt
+
+      - name: Exécuter le script
+        run: |
+          python Syncronisation.py
