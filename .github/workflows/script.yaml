@@ -24,4 +24,4 @@ jobs:
 
       - name: Exécuter le script
         run: |
-          python Syncronisation.py
+          python Synchronisation.py
