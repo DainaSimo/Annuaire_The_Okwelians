@@ -12,7 +12,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: Annuaire
           MYSQL_DATABASE: the_okwelians
         ports:
           - 3306:3306
@@ -24,9 +24,9 @@ jobs:
 
       - name: Run script
         env:
-          MYSQL_HOST: 127.0.0.1
+          MYSQL_HOST: localhost
           MYSQL_USER: root
-          MYSQL_PASSWORD: root
+          MYSQL_PASSWORD: Annuaire
           MYSQL_DATABASE: the_okwelians
         run: python Synchronisation.py
 
