@@ -6,7 +6,7 @@ import mysql.connector
 # 1) Configuration de google sheet
 
 champ_application = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-References = ServiceAccountCredentials.from_json_keyfile_name("Credentials.json", champ_application)
+References = ServiceAccountCredentials.from_json_keyfile_name("service_account.json", champ_application)
 client = gspread.authorize(References)
 
 # Ouverture du classeur
