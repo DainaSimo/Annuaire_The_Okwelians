@@ -277,10 +277,10 @@ print("✅ Synchronisation terminée avec succès !")
 
 # ✅ 3) Connexion MySQL
 conn = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="Annuaire",
-  database="the_okwelians"
+  host=os.getenv("MYSQL_HOST", "localhost"),
+  user=os.getenv("MYSQL_USER", "root"),
+  password=os.getenv("MYSQL_PASSWORD", "Annuaire"),
+  database=os.getenv("MYSQL_DATABASE", "the_okwelians")
 )
 cursor = conn.cursor()
 
